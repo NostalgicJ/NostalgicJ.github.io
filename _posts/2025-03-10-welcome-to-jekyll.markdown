@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "시행착오 미침침"
 date:   2025-03-10 02:10:12 +0900
 categories: jekyll update
 ---
