@@ -161,11 +161,11 @@ yat:
 #   - about.md
 
 # Page default value
-# defaults:
-#   home:
-#     heading: "Your awesome heading"
-#     subheading: "Your awesome subheading"
-#     banner: "Your image url"
+defaults:
+  home:
+    heading: "Yeojung's Portfolio"
+    subheading: "This is my journey"
+    # banner: "Your image url"
 
 # Banner default settings
 # These banner settings are for global banner default, but you can also

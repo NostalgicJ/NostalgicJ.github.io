@@ -23,6 +23,7 @@ end
 # 현재 Ruby 3.4.4를 사용 중이시므로 필수적이지는 않지만, 미래를 위해 추가하는 것을 권장합니다.
 gem 'bigdecimal'
 gem 'logger'
+gem 'ostruct'
 
 # `gemspec`은 Jekyll 테마 개발 시 사용됩니다.
 # 만약 당신의 프로젝트가 테마 자체가 아니라 일반 Jekyll 사이트라면 이 줄은 필요 없을 수 있습니다.
