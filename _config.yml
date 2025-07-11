@@ -162,10 +162,15 @@ yat:
 
 # Page default value
 defaults:
-  home:
-    heading: "Yeojung's Portfolio"
-    subheading: "This is my journey"
-    # banner: "Your image url"
+  - # 이 하이픈은 그대로 둡니다. (들여쓰기 2칸)
+    scope: # (들여쓰기 2칸)
+      path: "" # (들여쓰기 4칸)
+      type: "pages" # (들여쓰기 4칸)
+      layout: "home" # <--- 이 줄을 추가합니다! (들여쓰기 6칸)
+    values: # (들여쓰기 2칸)
+      heading: "Yeojung's Portfolio" # (들여쓰기 4칸)
+      subheading: "This is my journey" # (들여쓰기 4칸)
+      # banner: "Your image url" # (들여쓰기 4칸) - 이건 그대로 두세요.
 
 # Banner default settings
 # These banner settings are for global banner default, but you can also
