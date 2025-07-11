@@ -1,0 +1,52 @@
+name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - main # 당신의 웹사이트 소스 코드가 있는 브랜치 이름입니다. (예: main 또는 master)
+
+# GitHub Pages 배포를 위한 필수 권한 설정
+permissions:
+  contents: write # 리포지토리 콘텐츠에 쓸 권한 (gh-pages 브랜치에 빌드된 파일을 푸시)
+  pages: write    # GitHub Pages에 배포할 권한
+  id-token: write # OpenID Connect (OIDC) 토큰을 얻기 위한 권한
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # 빌드를 실행할 운영체제
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # GitHub 저장소의 코드를 가져옵니다.
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        # 로컬에서 `ruby -v` 또는 `rbenv versions`로 확인한 Ruby 버전에 맞춰주세요.
+        # 예: Ruby 3.4.4를 사용 중이라면 '3.4'로 지정합니다.
+        ruby-version: '3.4' # <-- 이 부분을 로컬 Ruby 버전과 일치시키는 것이 중요합니다.
+        bundler-cache: true # Gemfile.lock을 기반으로 Bundler 캐싱을 활성화하여 젬 설치 속도를 높입니다.
+
+    - name: Install dependencies
+      run: |
+        # 이 명령어가 Gemfile.lock에 명시된 모든 젬(jekyll-paginate, jekyll-spaceship 포함)을 설치합니다.
+        bundle install
+
+    - name: Build Jekyll site
+      run: bundle exec jekyll build # 설치된 모든 플러그인과 함께 Jekyll 사이트를 빌드합니다.
+
+    - name: Upload artifact for deployment
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./_site # Jekyll이 빌드한 정적 파일들이 저장되는 경로
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # 'build' job이 성공적으로 완료된 후에 이 job을 실행합니다.
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # 빌드된 아티팩트를 GitHub Pages에 배포합니다.
